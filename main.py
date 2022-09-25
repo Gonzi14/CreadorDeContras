@@ -1,34 +1,36 @@
 import random
 import string
 from random import randrange
+
+
 def GuardarLasContras(contra, titulo):
-    with open("GeneradorDeContras\Contras.txt", "a") as archivo:
-        archivo.write(titulo + ": " + str(contra) + ".\n")
+    with open("Contras.txt", "a") as archivo:
+        archivo.write(titulo + ": " + str(contra) + "\n")
         archivo.close()
     return contra
+
+
 def GenerarLasContras(contraParametros, contraCantidad, titulo):
     contraFinal = ""
     if contraParametros == 1:
-        valor = randrange(10)
-        contraFinal =+ f"{valor}"
-        print(valor)
-        print(contraFinal)    
+        for i in range(contraCantidad):
+            valor = randrange(10)
+            contraFinal = contraFinal + f"{str(valor)}"
+         
     elif contraParametros == 2:
-        for i in range(1, contraCantidad):
-            DOS = randrange(1)
-            if DOS == 1:
+        for i in range(contraCantidad):
+            DOS = randrange(3)
+            if DOS == 0:
                 valor = randrange(10)
-            else:
+            elif DOS == 1:
                 valor = random.choice(string.ascii_lowercase)
-            contraFinal =+ f"{string(int(valor))}"
-            print(valor)
-            print(contraFinal)   
+            elif DOS == 2:
+                valor = random.choice(string.ascii_uppercase)
+            contraFinal = contraFinal + str(valor)
+    print(contraFinal)   
+    GuardarLasContras(contraFinal, titulo)
+contraParametros = int(input("Desea que la contraseña sea con numeros(1) o con numeros y letras(2)? "))
+contraCantidad = int(input("Cual es la longitud que desea que tenga esta contraseña? "))
+GenerarLasContras(contraParametros, contraCantidad, input("Cual sera el nombre de la contra? "))
 
-    return GuardarLasContras(contraFinal, titulo)
-    #contraParametros = int(input("Desea que la contraseña sea con numeros(1), con numeros y letras(2) o numeros,"
-    #                             "letras y "
-     #                        "mayusculas(3)?"))
-    #contraCantidad = int(input("Cual es la longitud que desea que tenga esta contraseña?"))
-    #GenerarLasContras(contraParametros, contraCantidad)
-GenerarLasContras(2, 10, "prueba")
 
